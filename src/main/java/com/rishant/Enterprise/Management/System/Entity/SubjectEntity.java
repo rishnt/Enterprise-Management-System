@@ -7,8 +7,8 @@ import jakarta.persistence.Id;
 
 @Entity
 public class SubjectEntity {
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subject_id;
     private String title;
-
 }

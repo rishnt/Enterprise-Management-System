@@ -1,9 +1,6 @@
 package com.rishant.Enterprise.Management.System.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class AdmissionEntity {
@@ -11,4 +8,7 @@ public class AdmissionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long admission_id;
     private Integer admission_fees;
+    @OneToOne
+    @JoinColumn(name= "student_id",referencedColumnName = "student_id")
+    private StudentEntity student;
 }

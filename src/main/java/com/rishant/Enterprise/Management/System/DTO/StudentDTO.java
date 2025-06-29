@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentDTO {
-    private Long student_id;
-    private String student_name;
+    private Long studentId;
+    private String studentName;
 //    private AdmissionDTO admission;
 }

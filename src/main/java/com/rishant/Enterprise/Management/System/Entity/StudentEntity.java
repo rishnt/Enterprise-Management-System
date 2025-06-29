@@ -12,7 +12,7 @@ import lombok.*;
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long student_id;
-    private String student_name;
+    private Long studentId;
+    private String studentName;
 
 }

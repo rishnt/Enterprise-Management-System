@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdmissionDTO {
-    private Long admission_id;
-    private Integer admission_fees;
+    private Long admissionId;
+    private Integer admissionFees;
+    private String schoolName;
 }

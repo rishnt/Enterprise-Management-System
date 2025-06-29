@@ -2,24 +2,63 @@ package com.rishant.Enterprise.Management.System.Controller;
 
 import com.rishant.Enterprise.Management.System.DTO.StudentDTO;
 import com.rishant.Enterprise.Management.System.Service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/student")
 public class StudentController {
-
     private final StudentService studentService;
-    public StudentController(StudentService studentService){
-        this.studentService=studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
+
     @PostMapping
-    public ResponseEntity<StudentDTO> createNewStudent(@RequestBody StudentDTO studentDTO){
-           StudentDTO student= studentService.createNewStudent(studentDTO);
-           System.out.println("************");
-           return ResponseEntity.ok(student);
+    public ResponseEntity<StudentDTO> createNewStudent(@RequestBody StudentDTO studentDTO) {
+        StudentDTO student = studentService.createNewStudent(studentDTO);
+        return ResponseEntity.ok(student);
+    }
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity<StudentDTO> getStudentDetails(@PathVariable Long studentId) {
+        return studentService.getStudentDetails(studentId).map(ResponseEntity::ok)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found"));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StudentDTO>> getAllDetails() {
+        List<StudentDTO> dto = studentService.getAllDetails();
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long studentId) {
+        boolean status = studentService.deleteStudent(studentId);
+        if (status) return ResponseEntity.ok("Student Successfully removed");
+        else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
+    }
+
+    @PutMapping("/{studentId}")
+    public ResponseEntity<StudentDTO> updateStudentDetails(@PathVariable Long studentId,
+                                                           @RequestBody StudentDTO studentDTO) {
+        StudentDTO updatedStudent = studentService.updateStudentDetails(studentId, studentDTO);
+        return updatedStudent != null
+                ? ResponseEntity.ok(updatedStudent)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @PatchMapping("/{studentId}")
+    public ResponseEntity<StudentDTO> updatePartialDetails(@PathVariable Long studentId,
+                                                           Map<String, Object> studentDetails) {
+        StudentDTO updatedStudent = studentService.updatePartialStudentDetails(studentId, studentDetails);
+        return updatedStudent != null
+                ? ResponseEntity.ok(updatedStudent)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 }

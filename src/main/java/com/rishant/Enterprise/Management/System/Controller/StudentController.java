@@ -55,7 +55,7 @@ public class StudentController {
 
     @PatchMapping("/{studentId}")
     public ResponseEntity<StudentDTO> updatePartialDetails(@PathVariable Long studentId,
-                                                           Map<String, Object> studentDetails) {
+                                                           @RequestBody  Map<String, Object> studentDetails) {
         StudentDTO updatedStudent = studentService.updatePartialStudentDetails(studentId, studentDetails);
         return updatedStudent != null
                 ? ResponseEntity.ok(updatedStudent)

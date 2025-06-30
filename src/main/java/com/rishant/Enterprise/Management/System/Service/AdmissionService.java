@@ -34,9 +34,15 @@ public class AdmissionService {
 
     public List<AdmissionDTO> getAdmissionDetails() {
         List<AdmissionEntity> entities = admissionRepository.findAll();
-        return entities.stream()
-                .map(admissionEntity -> mapper.map(admissionEntity, AdmissionDTO.class))
-                .toList();
+        if(!entities.isEmpty()){
+            return entities.stream()
+                    .map(admissionEntity -> mapper.map(admissionEntity, AdmissionDTO.class))
+                    .toList();
+        }
+        else{
+            return null;
+        }
+
     }
 
     public AdmissionDTO updateAdmissionDetails(Long admissionId, AdmissionDTO admissionDTO) {
@@ -74,5 +80,13 @@ public class AdmissionService {
         } else {
             return null;
         }
+    }
+
+    public boolean deleteAdmission(Long admissionId) {
+        if (admissionRepository.existsById(admissionId)) {
+            admissionRepository.deleteById(admissionId);
+            return true;
+        }
+        return false;
     }
 }

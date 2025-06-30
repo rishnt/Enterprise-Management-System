@@ -13,7 +13,11 @@ import java.util.Map;
 @RequestMapping(path = "/admission")
 public class AdmissionController {
 
-    private AdmissionService admissionService;
+    private final AdmissionService admissionService;
+
+    AdmissionController(AdmissionService admissionService) {
+        this.admissionService = admissionService;
+    }
 
     @PostMapping
     public ResponseEntity<AdmissionDTO> createNewAdmission(@RequestBody AdmissionDTO admissionDTO) {
@@ -22,16 +26,19 @@ public class AdmissionController {
     }
 
     @GetMapping(path = "/{admissionId}")
-    public ResponseEntity<AdmissionDTO> getAdmissionDetailsById(@PathVariable Long admissionId) {
+    public ResponseEntity<?> getAdmissionDetailsById(@PathVariable Long admissionId) {
         AdmissionDTO admissionDTO = admissionService.getAdmissionDetailsById(admissionId);
         return admissionDTO != null
                 ? ResponseEntity.ok(admissionDTO)
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body("User does not exist in the database");
     }
 
     @GetMapping
-    public ResponseEntity<List<AdmissionDTO>> getAdmissionDetails() {
+    public ResponseEntity<?> getAdmissionDetails() {
         List<AdmissionDTO> admissionDetail = admissionService.getAdmissionDetails();
+        if(admissionDetail == null || admissionDetail.isEmpty()) {
+            return ResponseEntity.ok("No data is in the database");
+        }
         return ResponseEntity.ok(admissionDetail);
     }
 
@@ -44,11 +51,20 @@ public class AdmissionController {
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @PatchMapping(path = "/{admission}")
-    public ResponseEntity<AdmissionDTO> updatePartialDetails(@PathVariable Long admissionId, Map<String, Object> admissionDetails) {
+    @PatchMapping(path = "/{admissionId}")
+    public ResponseEntity<AdmissionDTO> updatePartialDetails(@PathVariable Long admissionId,@RequestBody Map<String, Object> admissionDetails) {
         AdmissionDTO admissionDTO = admissionService.updatePartialDetails(admissionId, admissionDetails);
         return admissionDTO != null
                 ? ResponseEntity.ok(admissionDTO)
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+    @DeleteMapping(path = "/{admissionId}")
+    public ResponseEntity<String> deleteAdmissionById(@PathVariable Long admissionId) {
+        boolean status = admissionService.deleteAdmission(admissionId);
+        if (status) {
+            return ResponseEntity.status(HttpStatus.OK).body("Admission Details removed from the database");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admission Details does not exist in the database");
+        }
     }
 }

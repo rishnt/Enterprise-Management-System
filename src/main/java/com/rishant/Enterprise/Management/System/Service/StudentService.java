@@ -80,6 +80,9 @@ public class StudentService {
                     case "studentName":
                         entity.setStudentName((String) value);
                         break;
+                    case "studentAddress":
+                        entity.setStudentAddress((String) value);
+                        break;
                     default:
                         throw new RuntimeException("Invalid field: " + key);
                 }

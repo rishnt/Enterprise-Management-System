@@ -20,10 +20,10 @@ public class AdmissionService {
         this.mapper = mapper;
     }
 
-    public AdmissionDTO createNewAdmission(AdmissionDTO admissionDTO) {
+    public boolean createNewAdmission(AdmissionDTO admissionDTO) {
         AdmissionEntity entity = mapper.map(admissionDTO, AdmissionEntity.class);
         AdmissionEntity savedEntity = admissionRepository.save(entity);
-        return mapper.map(savedEntity, AdmissionDTO.class);
+        return savedEntity != null && savedEntity.getAdmissionId() != null;
     }
 
     public AdmissionDTO getAdmissionDetailsById(Long admissionId) {

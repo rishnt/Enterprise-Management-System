@@ -2,6 +2,7 @@ package com.rishant.Enterprise.Management.System.Controller;
 
 import com.rishant.Enterprise.Management.System.DTO.StudentDTO;
 import com.rishant.Enterprise.Management.System.Service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,11 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDTO> createNewStudent(@RequestBody StudentDTO studentDTO) {
-        StudentDTO student = studentService.createNewStudent(studentDTO);
-        return ResponseEntity.ok(student);
+    public ResponseEntity<?> createNewStudent(@RequestBody @Valid StudentDTO studentDTO) {
+        boolean student = studentService.createNewStudent(studentDTO);
+        return student
+                ? ResponseEntity.status(HttpStatus.CREATED).body(studentDTO)
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
     }
 
     @GetMapping("/{studentId}")

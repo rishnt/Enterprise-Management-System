@@ -2,6 +2,7 @@ package com.rishant.Enterprise.Management.System.Controller;
 
 import com.rishant.Enterprise.Management.System.DTO.AdmissionDTO;
 import com.rishant.Enterprise.Management.System.Service.AdmissionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,11 @@ public class AdmissionController {
     }
 
     @PostMapping
-    public ResponseEntity<AdmissionDTO> createNewAdmission(@RequestBody AdmissionDTO admissionDTO) {
-        admissionService.createNewAdmission(admissionDTO);
-        return ResponseEntity.ok(admissionDTO);
+    public ResponseEntity<?> createNewAdmission(@RequestBody @Valid AdmissionDTO admissionDTO) {
+       boolean created =  admissionService.createNewAdmission(admissionDTO);
+        return created
+                ? ResponseEntity.status(HttpStatus.CREATED).body(admissionDTO)
+                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
     }
 
     @GetMapping(path = "/{admissionId}")

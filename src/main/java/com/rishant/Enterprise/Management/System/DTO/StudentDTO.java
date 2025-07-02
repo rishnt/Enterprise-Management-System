@@ -1,5 +1,7 @@
 package com.rishant.Enterprise.Management.System.DTO;
 
+import com.rishant.Enterprise.Management.System.DataValidation.StudentAddressValidation;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data
@@ -7,7 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 public class StudentDTO {
     private Long studentId;
+    @NonNull
     private String studentName;
+    @NotNull @StudentAddressValidation
     private String studentAddress;
-//    private AdmissionDTO admission;
 }

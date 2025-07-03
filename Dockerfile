@@ -1,5 +1,11 @@
+# First stage: Build the application
+FROM maven:3.9.6-amazoncorretto-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Second stage: Run the application
 FROM openjdk:17-jdk-slim
-VOLUME /tmp
-ARG JAR_FILE=target/Enterprise-Management-System-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

@@ -1,11 +1,15 @@
 package com.rishant.Enterprise.Management.System.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.rishant.Enterprise.Management.System.DTO.StudentDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Getter
 @Setter
 @Entity
@@ -15,7 +19,8 @@ public class AdmissionEntity {
     private Long admissionId;
     private Integer admissionFees;
     private String schoolName;
-//    @OneToOne
-//    @JoinColumn(name= "student",referencedColumnName = "student_id")
-//    private StudentEntity student;
+    @OneToOne(cascade = CascadeType.ALL)
+
+    @JoinColumn(name = "student_id", referencedColumnName = "studentId")
+    private StudentEntity student;
 }

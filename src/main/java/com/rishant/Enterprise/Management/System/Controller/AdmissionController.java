@@ -22,10 +22,12 @@ public class AdmissionController {
 
     @PostMapping
     public ResponseEntity<?> createNewAdmission(@RequestBody @Valid AdmissionDTO admissionDTO) {
-       boolean created =  admissionService.createNewAdmission(admissionDTO);
-        return created
-                ? ResponseEntity.status(HttpStatus.CREATED).body(admissionDTO)
+       AdmissionDTO created =  admissionService.createNewAdmission(admissionDTO);
+        return created!= null
+                ? ResponseEntity.status(HttpStatus.CREATED).body(created)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
+//                ? ResponseEntity.status(HttpStatus.CREATED).body(admissionDTO)
+//                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
     }
 
     @GetMapping(path = "/{admissionId}")
@@ -69,5 +71,10 @@ public class AdmissionController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Admission Details does not exist in the database");
         }
+    }
+
+    @DeleteMapping
+    public boolean deleteAllData(){
+        return  admissionService.deleteAllAdmissionDetails();
     }
 }

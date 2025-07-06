@@ -25,11 +25,12 @@ public class StudentService {
         return studentRepository.existsById(studentId);
     }
 
-    public boolean createNewStudent(StudentDTO studentDTO) {
+    public StudentDTO createNewStudent(StudentDTO studentDTO) {
         StudentEntity entity = mapper.map(studentDTO, StudentEntity.class);
         StudentEntity savedEntity = studentRepository.save(entity);
-        System.out.println("Created Student: " + savedEntity);
-        return savedEntity != null && savedEntity.getStudentId() != null;
+        return savedEntity != null
+                ? mapper.map(savedEntity, StudentDTO.class)
+                : null;
     }
 
     public Optional<StudentDTO> getStudentDetails(Long studentId) {

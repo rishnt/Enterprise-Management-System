@@ -20,10 +20,12 @@ public class AdmissionService {
         this.mapper = mapper;
     }
 
-    public boolean createNewAdmission(AdmissionDTO admissionDTO) {
+    public AdmissionDTO createNewAdmission(AdmissionDTO admissionDTO) {
         AdmissionEntity entity = mapper.map(admissionDTO, AdmissionEntity.class);
         AdmissionEntity savedEntity = admissionRepository.save(entity);
-        return savedEntity != null && savedEntity.getAdmissionId() != null;
+         return savedEntity != null
+                ? mapper.map(savedEntity, AdmissionDTO.class)
+                : null;
     }
 
     public AdmissionDTO getAdmissionDetailsById(Long admissionId) {
@@ -88,5 +90,10 @@ public class AdmissionService {
             return true;
         }
         return false;
+    }
+
+    public boolean deleteAllAdmissionDetails() {
+         admissionRepository.deleteAll();
+         return true;
     }
 }

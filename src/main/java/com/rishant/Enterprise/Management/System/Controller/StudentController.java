@@ -22,10 +22,11 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<?> createNewStudent(@RequestBody @Valid StudentDTO studentDTO) {
-        boolean student = studentService.createNewStudent(studentDTO);
-        return student
-                ? ResponseEntity.status(HttpStatus.CREATED).body(studentDTO)
+        StudentDTO student = studentService.createNewStudent(studentDTO);
+        return student!= null
+                ? ResponseEntity.status(HttpStatus.CREATED).body(student)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
+
     }
 
     @GetMapping("/{studentId}")

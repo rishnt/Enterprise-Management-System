@@ -23,7 +23,7 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<?> createNewStudent(@RequestBody @Valid StudentDTO studentDTO) {
         StudentDTO student = studentService.createNewStudent(studentDTO);
-        return student!= null
+        return student != null
                 ? ResponseEntity.status(HttpStatus.CREATED).body(student)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
 
@@ -36,8 +36,11 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentDTO>> getAllDetails() {
+    public ResponseEntity<?> getAllDetails() {
         List<StudentDTO> dto = studentService.getAllDetails();
+        if (dto.isEmpty()) {
+            return ResponseEntity.ok("No data is in the database");
+        }
         return ResponseEntity.ok(dto);
     }
 
@@ -59,10 +62,16 @@ public class StudentController {
 
     @PatchMapping("/{studentId}")
     public ResponseEntity<StudentDTO> updatePartialDetails(@PathVariable Long studentId,
-                                                           @RequestBody  Map<String, Object> studentDetails) {
+                                                           @RequestBody Map<String, Object> studentDetails) {
         StudentDTO updatedStudent = studentService.updatePartialStudentDetails(studentId, studentDetails);
         return updatedStudent != null
                 ? ResponseEntity.ok(updatedStudent)
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteAllStudents() {
+        studentService.deleteAllStudents();
+        return ResponseEntity.ok("All Students Deleted Successfully");
     }
 }

@@ -94,4 +94,12 @@ public class StudentService {
             return null;
         }
     }
+
+    public void deleteAllStudents() {
+        if (!studentRepository.findAll().isEmpty()) {
+            studentRepository.deleteAll();
+        } else {
+            throw new RuntimeException("No students to delete");
+        }
+    }
 }

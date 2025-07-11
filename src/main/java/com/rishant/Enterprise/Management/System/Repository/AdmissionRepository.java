@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdmissionRepository extends JpaRepository<AdmissionEntity,Long> {
-
+    boolean existsBySchoolNameAndStudent_StudentNameAndStudent_StudentAddress(
+            String schoolName, String studentName, String studentAddress
+    );
 }

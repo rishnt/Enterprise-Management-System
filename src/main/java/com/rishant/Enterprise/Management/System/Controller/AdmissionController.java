@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +24,16 @@ public class AdmissionController {
 
     @PostMapping
     public ResponseEntity<?> createNewAdmission(@RequestBody @Valid AdmissionDTO admissionDTO) {
-       AdmissionDTO created =  admissionService.createNewAdmission(admissionDTO);
-        return created!= null
+        AdmissionDTO created = admissionService.createNewAdmission(admissionDTO);
+        return created != null
                 ? ResponseEntity.status(HttpStatus.CREATED).body(created)
                 : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
-//                ? ResponseEntity.status(HttpStatus.CREATED).body(admissionDTO)
-//                : ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check the Data again");
+    }
+
+    @PostMapping(path = "/upload")
+    public ResponseEntity<?> uploadCsv() throws IOException {
+         admissionService.saveDataFromCsv();
+      return ResponseEntity.ok("Data uploaded successfully");
     }
 
     @GetMapping(path = "/{admissionId}")
@@ -41,7 +47,7 @@ public class AdmissionController {
     @GetMapping
     public ResponseEntity<?> getAdmissionDetails() {
         List<AdmissionDTO> admissionDetail = admissionService.getAdmissionDetails();
-        if(admissionDetail == null || admissionDetail.isEmpty()) {
+        if (admissionDetail == null || admissionDetail.isEmpty()) {
             return ResponseEntity.ok("No data is in the database");
         }
         return ResponseEntity.ok(admissionDetail);
@@ -57,12 +63,13 @@ public class AdmissionController {
     }
 
     @PatchMapping(path = "/{admissionId}")
-    public ResponseEntity<AdmissionDTO> updatePartialDetails(@PathVariable Long admissionId,@RequestBody Map<String, Object> admissionDetails) {
+    public ResponseEntity<AdmissionDTO> updatePartialDetails(@PathVariable Long admissionId, @RequestBody Map<String, Object> admissionDetails) {
         AdmissionDTO admissionDTO = admissionService.updatePartialDetails(admissionId, admissionDetails);
         return admissionDTO != null
                 ? ResponseEntity.ok(admissionDTO)
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
     @DeleteMapping(path = "/{admissionId}")
     public ResponseEntity<String> deleteAdmissionById(@PathVariable Long admissionId) {
         boolean status = admissionService.deleteAdmission(admissionId);
@@ -74,7 +81,7 @@ public class AdmissionController {
     }
 
     @DeleteMapping
-    public boolean deleteAllData(){
-        return  admissionService.deleteAllAdmissionDetails();
+    public boolean deleteAllData() {
+        return admissionService.deleteAllAdmissionDetails();
     }
 }

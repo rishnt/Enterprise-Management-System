@@ -46,8 +46,7 @@ docker run -p 8080:8080 enterprise-management-system
 ### 📦 Build the Project
 
 Use the Maven wrapper to build the application:
-
-```bash
+```
 ./mvnw clean install
 
 

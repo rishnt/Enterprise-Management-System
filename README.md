@@ -17,6 +17,8 @@ The **Enterprise Management System** is designed to offer a backend foundation f
 - **Maven** (with Wrapper support)
 - **Docker**
 - **Git**
+- **Hibernate**
+  
 
 ---
 

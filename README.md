@@ -34,7 +34,13 @@ Before you begin, ensure you have the following installed:
 
 Use the Maven wrapper to build the application:
 
-
 ```bash
 ./mvnw clean install
 
+``` Run the Application
+Using SpringBoot 
+./mvnw spring-boot:run
+
+Using Docker
+docker build -t enterprise-management-system .
+docker run -p 8080:8080 enterprise-management-system

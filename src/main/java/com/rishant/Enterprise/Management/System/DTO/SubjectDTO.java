@@ -1,14 +1,19 @@
 package com.rishant.Enterprise.Management.System.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
-@Data
+import java.util.List;
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectDTO {
-    private Long subject_id;
+    private Long subjectId;
     private String title;
+    @JsonBackReference
+    private List<ProfessorDTO> professors;
+    @JsonBackReference
+    private List<StudentDTO> students;
 }

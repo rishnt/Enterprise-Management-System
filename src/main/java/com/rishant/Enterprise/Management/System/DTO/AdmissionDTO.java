@@ -1,10 +1,6 @@
 package com.rishant.Enterprise.Management.System.DTO;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rishant.Enterprise.Management.System.DataValidation.SchoolNameValidation;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 

@@ -39,14 +39,10 @@ docker build -t enterprise-management-system .
 docker run -p 8080:8080 enterprise-management-system
 
 
-```bash
-./mvnw spring-boot:run
-
-
 ### 📦 Build the Project
 
 Use the Maven wrapper to build the application:
-```
+
 ./mvnw clean install
 
 

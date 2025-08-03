@@ -35,14 +35,15 @@ Before you begin, ensure you have the following installed:
      ./mvnw spring-boot:run
 
 ### Using Docker 
+```
 docker build -t enterprise-management-system .
 docker run -p 8080:8080 enterprise-management-system
-
+```
 
 ### 📦 Build the Project
 
 Use the Maven wrapper to build the application:
-
+```
 ./mvnw clean install
 
 

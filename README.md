@@ -26,6 +26,44 @@ The **Enterprise Management System** is designed to offer a backend foundation f
 
 ---
 
+### 🚀 Features
+
+Student Management – Add, update, fetch, and delete student records.
+
+Professor Management – Manage professor details.
+
+Subject Management – CRUD operations for subjects.
+
+Admissions – Handle student admissions with validations.
+
+Custom Validation – School name & student address validation.
+
+RESTful APIs – Exposed endpoints for all entities.
+
+### 📌 API Endpoints
+#### Students
+GET /students – Fetch all students
+POST /students – Add a student
+PUT /students/{id} – Update student details
+DELETE /students/{id} – Delete student
+
+#### Professors
+
+GET /professors
+POST /professors
+PUT /professors/{id}
+DELETE /professors/{id}
+
+#### Subjects
+GET /subjects
+POST /subjects
+PUT /subjects/{id}
+DELETE /subjects/{id}
+
+#### Admissions
+GET /admissions
+POST /admissions
+
 ## 🚀 Getting Started
 
 ### ✅ Prerequisites

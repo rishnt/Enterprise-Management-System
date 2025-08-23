@@ -20,7 +20,9 @@ The **Enterprise Management System** is designed to offer a backend foundation f
 - **Hibernate**
   
 📂 Project Structure
-<img width="781" height="610" alt="image" src="https://github.com/user-attachments/assets/65dc44c4-eaff-479c-9346-c32eecab6529" />
+
+
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/65dc44c4-eaff-479c-9346-c32eecab6529" />
 
 ---
 

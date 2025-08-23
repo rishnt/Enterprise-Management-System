@@ -42,27 +42,27 @@ RESTful APIs – Exposed endpoints for all entities.
 
 ### 📌 API Endpoints
 #### Students
-GET /students – Fetch all students
-POST /students – Add a student
-PUT /students/{id} – Update student details
-DELETE /students/{id} – Delete student
+ ##### GET /students – Fetch all students
+ ##### POST /students – Add a student
+ ##### PUT /students/{id} – Update student details
+ ##### DELETE /students/{id} – Delete student
 
 #### Professors
 
-GET /professors
-POST /professors
-PUT /professors/{id}
-DELETE /professors/{id}
+ ##### GET /professors
+ ##### POST /professors
+ ##### PUT /professors/{id}
+ ##### DELETE /professors/{id}
 
 #### Subjects
-GET /subjects
-POST /subjects
-PUT /subjects/{id}
-DELETE /subjects/{id}
+ ##### GET /subjects
+ ##### POST /subjects
+ ##### PUT /subjects/{id}
+ ##### DELETE /subjects/{id}
 
 #### Admissions
-GET /admissions
-POST /admissions
+ ##### GET /admissions
+ ##### POST /admissions
 
 ## 🚀 Getting Started
 

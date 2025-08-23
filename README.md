@@ -19,6 +19,24 @@ The **Enterprise Management System** is designed to offer a backend foundation f
 - **Git**
 - **Hibernate**
   
+📂 Project Structure
+Enterprise-Management-System/
+│── src/main/java/com/rishant/Enterprise/Management/System/
+│   ├── Configuration/        # App configurations
+│   ├── Controller/           # REST Controllers (Student, Professor, Subject, Admission)
+│   ├── DataValidation/       # Custom validators
+│   ├── DTO/                  # Data Transfer Objects
+│   ├── Entity/               # JPA Entities
+│   ├── Repository/           # Spring Data Repositories
+│   ├── Service/              # Business logic layer
+│   └── EnterpriseManagementSystemApplication.java  # Main Spring Boot app
+│
+│── src/main/resources/
+│   ├── application.properties  # Application configs
+│   ├── admissions_500.csv      # Sample dataset
+│
+│── src/test/java/...           # Unit & Integration tests
+│── pom.xml                     # Maven dependencies
 
 ---
 

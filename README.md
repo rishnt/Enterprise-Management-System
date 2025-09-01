@@ -19,6 +19,7 @@ The **Enterprise Management System** is designed to offer a backend foundation f
 - **Git**
 - **Hibernate**
 - **Spring Security**
+- **ORM**
   
 📂 Project Structure
 

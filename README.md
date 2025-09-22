@@ -41,7 +41,7 @@ Custom Validation – School name & student address validation.
 
 RESTful APIs – Exposed endpoints for all entities.
 
-### 📌 API Endpoints
+### 📌 API Endpoint
 #### Students
  ##### GET /students – Fetch all students
  ##### POST /students – Add a student

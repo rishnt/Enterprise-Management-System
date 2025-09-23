@@ -39,7 +39,7 @@ Admissions – Handle student admissions with validations.
 
 Custom Validation – School name & student address validation.
 
-RESTful APIs – Exposed endpoints for all entities.
+RESTful APIs – Exposed endpoints for all entities
 
 ### 📌 API Endpoint
 #### Students

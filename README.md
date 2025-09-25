@@ -4,7 +4,7 @@ A robust, scalable, and modular enterprise management platform built with Java a
 
 ---
 
-## 📌 Overview
+## 📌 Overvie
 
 The **Enterprise Management System** is designed to offer a backend foundation for enterprise resource planning and administration. It includes built-in support for Maven, Docker, and Git versioning, making it easy to build, deploy, and maintain in modern DevOps Environment
 

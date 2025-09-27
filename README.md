@@ -1,4 +1,4 @@
-# 🏢 Enterprise Management SYSTEM
+# 🏢 Enterprise Management System
 
 A robust, scalable, and modular enterprise management platform built with Java and Spring Boot. This system provides a foundation for managing organizational processes, streamlining operations, and enabling enterprise Level service delivery.
 
